@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Free Laptop Registration</title>
+    <title>Student registration form — UI demonstration</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons -->
@@ -273,7 +273,9 @@
                 font-size: 24px;
             }
         }
-    </style>
+            .form-note { margin: 0 0 24px; color: #fff; line-height: 1.6; font-size: 14px; padding: 12px 15px; border: 1px solid rgba(255,255,255,.4); border-radius: 10px; background: rgba(0,0,0,.2); }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+        </style>
 </head>
 <body>
 
@@ -283,9 +285,11 @@
         <div class="blob blob-2"></div>
         
         <div class="header">
-            <h1>Free Laptop Registration</h1>
-            <h3>Administrative Office</h3>
+            <h1>Student Registration UI</h1>
+            <h3>Frontend demonstration — no submissions accepted</h3>
         </div>
+
+        <p role="note" class="form-note">This is an interface demonstration, not an official laptop scheme. Information entered here is not sent, saved or reviewed. Do not enter real personal details.</p>
 
         <form id="laptopForm" novalidate>
             <!-- Field 1: Student Name -->
@@ -328,14 +332,14 @@
                 <div class="error-message" id="classError"><i class="fas fa-exclamation-circle"></i> <span>Class and Section is required</span></div>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">Submit Registration</button>
+            <button type="submit" class="submit-btn" id="submitBtn">Test form validation</button>
         </form>
     </div>
 
     <!-- Toast -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
-        <span>Registration Submitted Successfully!</span>
+        <span>Valid example — nothing was submitted or saved.</span>
     </div>
 
     <script>
@@ -444,7 +448,7 @@
             });
 
             if (isValid) {
-                // Show success toast
+                // Show local-only validation feedback; never claim a real submission.
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
                 
@@ -469,13 +473,7 @@
                     });
                 }, 3000);
 
-                console.log("Form Data:", {
-                    name: document.getElementById('studentName').value,
-                    regNo: document.getElementById('regNo').value,
-                    email: document.getElementById('email').value,
-                    dept: document.getElementById('deptName').value,
-                    classSec: document.getElementById('classSection').value,
-                });
+
             } else {
                 // Shake container slightly
                 const container = document.querySelector('.container');
