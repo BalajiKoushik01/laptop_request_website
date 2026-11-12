@@ -1,0 +1,29 @@
+name: Form integrity checks
+on:
+  pull_request:
+  push:
+    branches: ["fix/**"]
+jobs:
+  static-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate static document and no deceptive submission
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          text = Path("index.html").read_text(encoding="utf-8")
+          assert "not sent, saved or reviewed" in text
+          assert "nothing was submitted or saved" in text
+          assert "console.log(\"Form Data:" not in text
+          assert "<form" in text and "</form>" in text
+          class Tags(HTMLParser):
+              def error(self, message):
+                  raise AssertionError(message)
+          Tags().feed(text)
+          print("Static form status and privacy notices checked")
+          PY
