@@ -19,3 +19,7 @@ A legitimate institution would need to identify the program and eligibility crit
 ## Licence
 
 See [LICENSE](LICENSE) for repository licensing.
+
+## Accessibility and privacy
+
+The demo now associates each invalid field with its error description using `aria-describedby`, updates `aria-invalid`, moves keyboard focus to the first invalid field, and announces the local-only feedback toast using `role=status`. The form remains **frontend-only**; it never submits or stores entries. Use synthetic examples rather than real student identification or contact information.

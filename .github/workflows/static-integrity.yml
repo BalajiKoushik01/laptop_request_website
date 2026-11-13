@@ -21,6 +21,10 @@ jobs:
           assert "nothing was submitted or saved" in text
           assert "console.log(\"Form Data:" not in text
           assert "<form" in text and "</form>" in text
+          assert 'role="status" aria-live="polite"' in text
+          assert "aria-invalid" in text
+          assert "aria-describedby" in text
+          assert "firstInvalid.focus()" in text
           class Tags(HTMLParser):
               def error(self, message):
                   raise AssertionError(message)
